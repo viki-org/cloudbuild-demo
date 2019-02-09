@@ -30,3 +30,8 @@ steps:
     waitFor: ['CleanDevEnv']
     name: 'gcr.io/cloud-builders/npm'
     args: ['--loglevel=error', 'install', '--production']
+  
+    - id: DeployAppEngine
+    waitFor: ['InstallProductionNpm']
+    name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', '-q', '--project', 'soompi-web-staging']

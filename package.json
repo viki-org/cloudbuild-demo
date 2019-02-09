@@ -1,0 +1,36 @@
+{
+  "name": "Hello-Cloud-Build-Appengine",
+  "description": "Simple Hello World Node.js sample for Google App Engine Standard and Cloud Build.",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Weiyuan Liu",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "deploy": "gcloud app deploy",
+    "start": "node app.js",
+    "system-test": "repo-tools test app",
+    "frontend-test": "./node_modules/.bin/jasmine-node --verbose --forceexit spec/client-assets",
+    "backend-test": "./node_modules/.bin/jasmine-node --verbose --forceexit spec/server-assets"
+  },
+  "dependencies": {
+    "express": "~4.16.3",
+    "request": "~2.88.0",
+    "ejs": "~1.0.0"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.16.2",
+    "@google-cloud/nodejs-repo-tools": "~3.0.0"
+  },
+  "cloud-repo-tools": {
+    "test": {
+      "app": {
+        "msg": "Hello, world!"
+      }
+    },
+    "requiresKeyFile": true,
+    "requiresProjectId": true
+  }
+}

@@ -1,0 +1,32 @@
+timeout: 120s
+options:
+  machineType: 'N1_HIGHCPU_8'
+
+steps:
+  - id: InstallTestNpm
+    waitFor: ['-']
+    name: 'gcr.io/cloud-builders/npm'
+    args: ['--loglevel=error', 'install', '--prefer-offline']
+  
+  - id: RunFrontendTests
+    waitFor: ['InstallTestNpm']
+    name: 'gcr.io/cloud-builders/npm'
+    args: ['start', 'frontend-test']
+
+  - id: RunBackendTests
+    waitFor: ['InstallTestNpm']
+    name: 'gcr.io/cloud-builders/npm'
+    args: ['start', 'backend-test']
+
+  - id: CleanDevEnv
+    waitFor: ['RunFrontendTests', 'RunBackendTests']
+    name: 'gcr.io/cloud-builders/npm'
+    args: 
+      - '-c'
+      - | 
+          rm node_modules
+
+  - id: InstallProductionNpm
+    waitFor: ['CleanDevEnv']
+    name: 'gcr.io/cloud-builders/npm'
+    args: ['--loglevel=error', 'install', '--production']

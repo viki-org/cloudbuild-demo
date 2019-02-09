@@ -1,0 +1,18 @@
+service: cloud-build-test
+runtime: nodejs10
+instance_class: B1
+manual_scaling:
+  instances: 1
+
+handlers:
+  - url: /server-assets
+    static_dir: server-assets
+
+  - url: /public
+    static_dir: public
+
+  - url: /client-assets
+    static_dir: client-assets
+
+  - url: /node_modules
+    static_dir: node_modules

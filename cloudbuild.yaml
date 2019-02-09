@@ -19,6 +19,7 @@ steps:
   - id: CleanDevEnv
     waitFor: ['RunFrontendTests', 'RunBackendTests']
     name: 'gcr.io/cloud-builders/npm'
+    entrypoint: bash
     args: 
       - '-c'
       - | 

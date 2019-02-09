@@ -9,12 +9,12 @@ steps:
   - id: RunFrontendTests
     waitFor: ['InstallTestNpm']
     name: 'gcr.io/cloud-builders/npm'
-    args: ['start', 'frontend-test']
+    args: ['run', 'frontend-test']
 
   - id: RunBackendTests
     waitFor: ['InstallTestNpm']
     name: 'gcr.io/cloud-builders/npm'
-    args: ['start', 'backend-test']
+    args: ['run', 'backend-test']
 
   - id: CleanDevEnv
     waitFor: ['RunFrontendTests', 'RunBackendTests']

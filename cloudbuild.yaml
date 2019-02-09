@@ -22,7 +22,8 @@ steps:
     args: 
       - '-c'
       - | 
-          rm node_modules
+          set -e
+          rm -rf node_modules
 
   - id: InstallProductionNpm
     waitFor: ['CleanDevEnv']
